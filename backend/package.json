@@ -6,6 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "db:dev:restart": "npm run db:dev:rm && npm run db:dev:up && sleep 1 && npm run prisma:dev:deploy",
+    "db:dev:rm": "docker compose --env-file .env rm dev-db -s -f -v",
+    "db:dev:up": "docker compose --env-file .env up dev-db -d",
+    "prisma:dev:deploy": "npx prisma migrate dev",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
