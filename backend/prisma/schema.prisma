@@ -10,13 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Meteor {
+model GameVersion {
   id        Int     @id @default(autoincrement())
   name      String
-  radius    Int
-  cost      Int
 
-  items MeteorItem[]
+  meteors   Meteor[]
+}
+
+model Meteor {
+  id            Int         @id @default(autoincrement())
+  name          String
+  radius        Int
+  cost          Int
+
+  gameVersionId Int
+  gameVersion   GameVersion @relation(fields: [gameVersionId], references: [id])
+
+  items         MeteorItem[]
 }
 
 model MeteorItem {
