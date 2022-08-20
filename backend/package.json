@@ -10,6 +10,7 @@
     "db:dev:rm": "docker compose --env-file .env rm dev-db -s -f -v",
     "db:dev:up": "docker compose --env-file .env up dev-db -d",
     "prisma:dev:deploy": "npx prisma migrate dev",
+    "prisma:dev:seed": "npx ts-node prisma/seed.ts",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -25,7 +26,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "prisma": {
-    "seed": "npx ts-node prisma/seed.ts"
+    "seed": "npm run prisma:dev:seed"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
