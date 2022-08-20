@@ -9,3 +9,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Meteor {
+  id        Int     @id @default(autoincrement())
+  name      String
+  radius    Int
+  cost      Int
+
+  items MeteorItem[]
+}
+
+model MeteorItem {
+  id        Int     @id @default(autoincrement())
+  name      String
+  weight    Int
+
+  meteorId  Int
+  meteor    Meteor  @relation(fields: [meteorId], references: [id])
+}
