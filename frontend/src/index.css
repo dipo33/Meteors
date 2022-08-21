@@ -18,6 +18,7 @@
 :root {
     color-scheme: light dark;
     --default-font-size: 1.625rem;
+    --smaller-font-size: 1.125rem;
     --dark-gray-background-color: #121212;
     --gray-background-color: #242424;
     --light-blue-highlight-color: #7ab6e0;
