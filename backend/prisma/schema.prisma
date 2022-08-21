@@ -24,7 +24,7 @@ model Meteor {
   cost          Int
 
   gameVersionId Int
-  gameVersion   GameVersion @relation(fields: [gameVersionId], references: [id])
+  gameVersion   GameVersion @relation(fields: [gameVersionId], references: [id], onDelete: Cascade)
 
   items         MeteorItem[]
 }
@@ -35,5 +35,5 @@ model MeteorItem {
   weight    Int
 
   meteorId  Int
-  meteor    Meteor  @relation(fields: [meteorId], references: [id])
+  meteor    Meteor  @relation(fields: [meteorId], references: [id], onDelete: Cascade)
 }
