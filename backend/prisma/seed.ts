@@ -1,57 +1,95 @@
 import { PrismaClient } from '@prisma/client';
+import { Octokit } from 'octokit';
+
+import 'dotenv/config';
+import * as AdmZip from 'adm-zip';
+import axios from 'axios';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Running seed.ts');
-
-  const testMeteor = await prisma.meteor.create({
-    data: {
-      name: 'Test Meteor',
-      cost: 69420,
-      radius: 42,
-    },
+  const octokit = new Octokit({
+    auth: process.env.GITHUB_TOKEN,
   });
 
-  const oreIron = await prisma.meteorItem.create({
-    data: {
-      name: 'Iron Ore',
-      weight: 50,
-      meteorId: testMeteor.id,
-    },
+  const result = await octokit.request('GET /repos/{owner}/{repo}/releases', {
+    owner: 'GTNewHorizons',
+    repo: 'GT-New-Horizons-Modpack',
   });
 
-  const oreCopper = await prisma.meteorItem.create({
-    data: {
-      name: 'Copper Ore',
-      weight: 50,
-      meteorId: testMeteor.id,
-    },
-  });
+  for (const version of result.data) {
+    const found = await prisma.gameVersion.findFirst({
+      where: {
+        name: version.name,
+      },
+    });
 
-  const oreTin = await prisma.meteorItem.create({
-    data: {
-      name: 'Tin Ore',
-      weight: 50,
-      meteorId: testMeteor.id,
-    },
-  });
+    if (found !== null) {
+      console.log('Version', version.name, 'already exists ');
+      continue;
+    }
 
-  const oreSilver = await prisma.meteorItem.create({
-    data: {
-      name: 'Silver Ore',
-      weight: 50,
-      meteorId: testMeteor.id,
-    },
-  });
+    console.log('Downloading', version.name);
+    const gameVersion = await prisma.gameVersion.create({
+      data: {
+        name: version.name,
+      },
+    });
 
-  const oreLead = await prisma.meteorItem.create({
-    data: {
-      name: 'Lead Ore',
-      weight: 50,
-      meteorId: testMeteor.id,
-    },
-  });
+    const latestUrl = version.zipball_url;
+    const response = await axios.get(latestUrl, {
+      responseType: 'arraybuffer',
+    });
+
+    const buffer = Buffer.from(response.data, 'utf-8');
+    const zip = new AdmZip(buffer);
+
+    for (const meteorEntry of zip.getEntries()) {
+      if (
+        meteorEntry.entryName.includes('config/BloodMagic/meteors/') &&
+        !meteorEntry.isDirectory
+      ) {
+        const meteorName = parseEntry(meteorEntry.entryName);
+
+        let meteorJSON;
+        try {
+          meteorJSON = JSON.parse(meteorEntry.getData().toString('utf-8'));
+        } catch (e) {
+          console.log('Version', version.name, 'failed to parse');
+          await prisma.gameVersion.delete({
+            where: {
+              id: gameVersion.id,
+            },
+          });
+
+          break;
+        }
+        const meteor = await prisma.meteor.create({
+          data: {
+            name: meteorName,
+            radius: parseInt(meteorJSON.radius),
+            cost: parseInt(meteorJSON.cost),
+            gameVersionId: gameVersion.id,
+          },
+        });
+
+        for (let i = 0; i < meteorJSON.ores.length; i += 2) {
+          await prisma.meteorItem.create({
+            data: {
+              name: meteorJSON.ores[i],
+              weight: parseInt(meteorJSON.ores[i + 1]),
+              meteorId: meteor.id,
+            },
+          });
+        }
+      }
+    }
+  }
+}
+
+function parseEntry(entry: string): string {
+  const dirs = entry.split('/');
+  return dirs[dirs.length - 1].split('.')[0];
 }
 
 main()
