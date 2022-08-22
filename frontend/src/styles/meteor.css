@@ -6,27 +6,42 @@
 }
 
 .meteor-card {
+    border-radius: 1rem;
+    background: var(--dark-gray-background-color);
+}
+
+.meteor-card__top {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;;
     padding: 1rem;
-    background: var(--dark-gray-background-color);
-    border-radius: 1rem;
     height: 12rem;
 }
 
-.meteor-card__image {
-    height: 100%;
+.meteor-card__bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0 6rem;
 }
 
-.meteor-card__content {
+.meteor-item-card {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    height: 6rem;
+}
+
+.meteor-card__image, .meteor-item-card__image {
+    background: var(--gray-background-color);
+    border-radius: 1rem;
+    padding: 0.2rem;
+}
+
+.meteor-card__content, .meteor-item-card__content {
+    margin-top: 0.2rem;
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
 }
 
 .meteor-card__title {
@@ -35,11 +50,41 @@
     font-weight: 900;
 }
 
+.meteor-item-card__title {
+    font-size: var(--smaller-font-size);
+    margin: 0 0 0.5rem 0;
+    color: var(--light-blue-highlight-color);
+    font-weight: 900;
+}
+
 .meteor-card__info {
     font-size: var(--smaller-font-size);
     color: var(--white-color);
 }
 
-.meteor-card__info--highlight {
+.meteor-item-card__info {
+    font-size: var(--smaller-font-size);
+    color: var(--white-color);
+}
+
+.meteor-card__info--highlight, .meteor-item-card__info--highlight {
     color: var(--light-blue-highlight-color);
+}
+
+.meteor-card__dropdown {
+    margin: auto 5rem 1rem auto;
+    width: 3.5rem;
+    cursor: pointer;
+
+    background: none;
+    border: none;
+}
+
+.meteor-card__dropdown-icon:hover {
+    filter: brightness(140%);
+}
+
+.meteor-card__divider {
+    background: var(--gray-background-color);
+    margin: 0 5rem;
 }
