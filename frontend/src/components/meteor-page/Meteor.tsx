@@ -1,5 +1,6 @@
 import MeteorOre from './MeteorOre';
 import { useState } from 'react';
+import { localize } from '../../utils/Localization';
 
 export interface MeteorProps {
   name: string;
@@ -64,7 +65,7 @@ const Meteor = (props: MeteorProps) => {
         </div>
         <div className='meteor-card__info'>
           <span className='meteor-card__info--highlight'>Catalyst – </span>
-          <span>{props.catalyst}</span></div>
+          <span>{localize(props.catalyst)}</span></div>
       </div>
       <button onClick={dropdownClick}
               className={`meteor-card__dropdown ${isOpen ? 'meteor-card__dropdown--active' : ''}`}>
