@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { GameVersion, Meteor, MeteorItem, Prisma } from '@prisma/client';
 
-type GameVersionModel = GameVersion;
-type MeteorModel = Meteor & { items: MeteorItem[] };
+export type GameVersionModel = GameVersion;
+export type MeteorModel = Meteor & { items: MeteorItem[] };
 
 @Injectable()
 export class VersionService {

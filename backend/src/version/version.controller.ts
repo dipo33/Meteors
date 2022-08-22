@@ -1,6 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { VersionService } from './version.service';
-import { GameVersion as GameVersionModel, Meteor } from '@prisma/client';
+import {
+  GameVersionModel,
+  MeteorModel,
+  VersionService,
+} from './version.service';
 
 @Controller('/versions')
 export class VersionController {
@@ -17,7 +20,7 @@ export class VersionController {
   }
 
   @Get('/:id/meteors')
-  async getMeteorsByVersionId(@Param('id') id: string): Promise<Meteor[]> {
+  async getMeteorsByVersionId(@Param('id') id: string): Promise<MeteorModel[]> {
     return this.versionService.meteors({
       where: { gameVersionId: Number(+id) },
     });
