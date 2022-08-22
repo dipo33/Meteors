@@ -1,29 +1,50 @@
 import '../../styles/meteor.css';
-import Meteor from './Meteor';
+import Meteor, { MeteorProps } from './Meteor';
+import { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 const MeteorPage = () => {
+
+  const [meteors, setMeteors] = useState<MeteorProps[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(`/versions/${1}/meteors`)
+      .then((response: AxiosResponse) => {
+        if (response.status === 200) {
+          setMeteors(remapMeteors(response.data));
+        }
+      })
+      .catch((error) => {
+        // TODO: Add proper error handling
+        console.error(error);
+      });
+  });
+
+  const remapMeteors = (meteors: any[]) => {
+    return meteors.map((meteor: any) => {
+      return {
+        name: meteor.name,
+        cost: meteor.cost,
+        radius: meteor.radius,
+        catalyst: 'Placeholder Catalyst',
+        ores: meteor.items.map((item: any) => {
+          return {
+            name: item.name,
+            weight: item.weight,
+          };
+        }),
+      };
+    });
+  };
+
   return (
     <main className='main-content'>
-      <Meteor
-        name={'The Greatest Meteor'} cost={570000} radius={18}
-        catalyst={'IV Mass Fabricator'} ores={[
-        {
-          name: 'A Block of Kevin Flesh',
-          weight: 70,
-        },
-        {
-          name: 'A Block of Kevin Blood',
-          weight: 30,
-        },
-      ]} />
-      <Meteor
-        name={'The Worst Meteor'} cost={1000000} radius={4}
-        catalyst={'Dirt'} ores={[
-        {
-          name: 'A Block of Dirt',
-          weight: 10,
-        },
-      ]} />
+      {
+        meteors.map((meteor: MeteorProps, index) => (
+          <Meteor key={index} {...meteor} />
+        ))
+      }
     </main>
   );
 };
