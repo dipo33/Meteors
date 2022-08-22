@@ -1,3 +1,5 @@
+import { formatNumber } from '../../utils/Formatting';
+
 export interface MeteorOreProps {
   name: string;
   weight: number;
@@ -18,7 +20,7 @@ const MeteorOre = (props: MeteorOreProps) => {
           <span>{props.proportion}%</span>
         </div>
         <div className='meteor-item-card__info'>
-          <span>Meteor will contain roughly ~{props.amount} blocks of this type</span>
+          <span>Meteor will contain roughly ~{formatNumber(props.amount)} blocks of this type</span>
         </div>
       </div>
     </div>

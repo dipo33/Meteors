@@ -1,6 +1,7 @@
 import MeteorOre from './MeteorOre';
 import { useState } from 'react';
 import { localize } from '../../utils/Localization';
+import { formatNumber } from '../../utils/Formatting';
 
 export interface MeteorProps {
   name: string;
@@ -18,12 +19,6 @@ const Meteor = (props: MeteorProps) => {
 
   const dropdownClick = () => {
     setIsOpen(!isOpen);
-  };
-
-  const formatNumber = (num: number) => {
-    return num.toString().split('').reverse().join('')
-      .replace(/([0-9]{3})/g, '$1 ')
-      .split('').reverse().join('');
   };
 
   const formatText = (text: string) => {
