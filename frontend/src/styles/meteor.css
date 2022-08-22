@@ -8,6 +8,7 @@
 .meteor-card {
     border-radius: 1rem;
     background: var(--dark-gray-background-color);
+    margin-bottom: 1rem;
 }
 
 .meteor-card__top {
@@ -80,11 +81,15 @@
     border: none;
 }
 
+.meteor-card__dropdown--active {
+    transform: rotate(180deg);
+}
+
 .meteor-card__dropdown-icon:hover {
     filter: brightness(140%);
 }
 
 .meteor-card__divider {
     background: var(--gray-background-color);
-    margin: 0 5rem;
+    margin: 0 1rem;
 }
