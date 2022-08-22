@@ -29,6 +29,7 @@ const Meteor = (props: MeteorProps) => {
   const formatText = (text: string) => {
     let result = text.replace(/([^A-Z])([A-Z])/g, '$1 $2');
     result = result.replace(/([^ ])([A-Z])([a-z])/g, '$1 $2$3');
+    result = result.replace(/([a-z])([0-9])/g, '$1 $2');
     result = result.charAt(0).toUpperCase() + result.substring(1);
     if (result.charAt(0) === ' ') return result.substring(1);
     return result;
