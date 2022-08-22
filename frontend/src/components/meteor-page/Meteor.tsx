@@ -25,6 +25,14 @@ const Meteor = (props: MeteorProps) => {
       .split('').reverse().join('');
   };
 
+  const formatText = (text: string) => {
+    let result = text.replace(/([^A-Z])([A-Z])/g, '$1 $2');
+    result = result.replace(/([^ ])([A-Z])([a-z])/g, '$1 $2$3');
+    result = result.charAt(0).toUpperCase() + result.substring(1);
+    if (result.charAt(0) === ' ') return result.substring(1);
+    return result;
+  };
+
   const computeOres = (ores: MeteorProps['ores']) => {
     let total = 0;
     ores.forEach((ore) => {
@@ -33,7 +41,7 @@ const Meteor = (props: MeteorProps) => {
 
     return ores.map((ore) => {
       return {
-        name: ore.name,
+        name: formatText(ore.name),
         weight: ore.weight,
         proportion: Math.ceil(ore.weight / total * 1000) / 10,
         amount: Math.ceil(3 / 4 * Math.PI * Math.pow(props.radius, 3) / total * ore.weight),
@@ -45,7 +53,7 @@ const Meteor = (props: MeteorProps) => {
     <div className='meteor-card__top'>
       <img className='meteor-card__image' src={'/gtnh.png'} alt='logo' />
       <div className='meteor-card__content'>
-        <h2 className='meteor-card__title'>{props.name}</h2>
+        <h2 className='meteor-card__title'>{formatText(props.name)}</h2>
         <div className='meteor-card__info'>
           <span className='meteor-card__info--highlight'>Cost – </span>
           <span>{formatNumber(props.cost)} LP</span>
