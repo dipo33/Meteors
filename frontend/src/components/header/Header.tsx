@@ -1,6 +1,36 @@
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Header = () => {
+export interface HeaderProps {
+  setVersionId: (versionId: number) => void;
+}
+
+type Version = {
+  id: number;
+  name: string;
+}
+
+const Header = ({ setVersionId }: HeaderProps) => {
+  const [versions, setVersions] = useState<Version[]>([]);
+
+  useEffect(() => {
+    axios.get('/versions')
+      .then(response => {
+        if (response.status === 200) {
+          setVersions(response.data);
+        }
+      })
+      .catch(error => {
+        // TODO: Add proper error handling
+        console.log(error);
+      });
+  }, []);
+
+  const onVersionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setVersionId(Number(event.target.value));
+  };
+
   return (
     <header className='header'>
       <Link to='/'>
@@ -13,7 +43,13 @@ const Header = () => {
         </li>
         <li className='main-nav__item'>
           <span className='main-nav__item--highlight'>Version: </span>
-          <span className='main-nav__item--selected'>2.1.2.4-27-pre</span>
+          <select className='main-nav__version-select' onChange={onVersionChange} name='versions'>
+            {
+              versions.map((version, index) => (
+                <option key={index} value={version.id}>{version.name}</option>
+              ))
+            }
+          </select>
         </li>
       </ul>
     </header>

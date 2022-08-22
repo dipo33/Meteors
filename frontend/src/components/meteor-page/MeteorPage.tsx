@@ -3,13 +3,17 @@ import Meteor, { MeteorProps } from './Meteor';
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
-const MeteorPage = () => {
+export interface MeteorPageProps {
+  versionId: number;
+}
+
+const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
   const [meteors, setMeteors] = useState<MeteorProps[]>([]);
 
   useEffect(() => {
     axios
-      .get(`/versions/${1}/meteors`)
+      .get(`/versions/${versionId}/meteors`)
       .then((response: AxiosResponse) => {
         if (response.status === 200) {
           setMeteors(remapMeteors(response.data));
@@ -19,7 +23,7 @@ const MeteorPage = () => {
         // TODO: Add proper error handling
         console.error(error);
       });
-  });
+  }, [versionId]);
 
   const remapMeteors = (meteors: any[]) => {
     return meteors.map((meteor: any) => {

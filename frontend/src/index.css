@@ -134,6 +134,18 @@ a:active {
     font-weight: 900;
 }
 
+.main-nav__version-select {
+    outline: none;
+    box-sizing: border-box;
+
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: inherit;
+}
+
 .main-nav__item:nth-last-child(1) {
     margin: 0 7rem 0 auto;
     text-align: right;
