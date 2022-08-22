@@ -137,13 +137,15 @@ a:active {
 .main-nav__version-select {
     outline: none;
     box-sizing: border-box;
-
-    appearance: none;
-    background-color: transparent;
-    border: none;
-    font-family: inherit;
+    background-color: var(--gray-background-color);
+    border-color: var(--gray-background-color);
+    border-style: solid;
+    border-width: 0.2rem;
+    border-radius: 0.3rem;
     font-weight: 900;
     font-size: inherit;
+    font-family: inherit;
+    padding-left: 0.3rem;
 }
 
 .main-nav__item:nth-last-child(1) {
