@@ -64,9 +64,12 @@ async function main() {
 
           break;
         }
+
+        const catalystName = `${meteorJSON.focusModId}:${meteorJSON.focusName}:${meteorJSON.focusMeta}`;
         const meteor = await prisma.meteor.create({
           data: {
             name: meteorName,
+            catalyst: catalystName,
             radius: parseInt(meteorJSON.radius),
             cost: parseInt(meteorJSON.cost),
             gameVersionId: gameVersion.id,

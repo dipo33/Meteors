@@ -7,7 +7,7 @@ import { useState } from 'react';
 function App() {
   axios.defaults.baseURL = 'http://localhost:3000';
 
-  const [versionId, setVersionId] = useState(0);
+  const [versionId, setVersionId] = useState(1);
 
   return (
     <BrowserRouter>

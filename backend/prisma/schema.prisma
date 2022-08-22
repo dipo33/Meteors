@@ -22,6 +22,7 @@ model Meteor {
   name          String
   radius        Int
   cost          Int
+  catalyst      String
 
   gameVersionId Int
   gameVersion   GameVersion @relation(fields: [gameVersionId], references: [id], onDelete: Cascade)

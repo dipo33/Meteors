@@ -31,7 +31,7 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
         name: meteor.name,
         cost: meteor.cost,
         radius: meteor.radius,
-        catalyst: 'Placeholder Catalyst',
+        catalyst: meteor.catalyst,
         ores: meteor.items.map((item: any) => {
           return {
             name: item.name,
