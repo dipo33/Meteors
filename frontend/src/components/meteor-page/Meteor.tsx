@@ -1,5 +1,5 @@
 import MeteorOre from './MeteorOre';
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { localize } from '../../utils/Localization';
 import { formatNumber } from '../../utils/Formatting';
 
@@ -16,6 +16,15 @@ export interface MeteorProps {
 
 const Meteor = (props: MeteorProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const imageOnError = (event: SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = '/gtnh.png';
+  };
+
+  const toTexturePath = (unlocalizedName: string) => {
+    return `/textures/${unlocalizedName.replaceAll(':', '--')}.png`;
+  };
 
   const dropdownClick = () => {
     setIsOpen(!isOpen);
@@ -48,7 +57,7 @@ const Meteor = (props: MeteorProps) => {
 
   return (<div className='meteor-card'>
     <div className='meteor-card__top'>
-      <img className='meteor-card__image' src={'/gtnh.png'} alt='logo' />
+      <img className='meteor-card__image' src={toTexturePath(props.catalyst)} onError={imageOnError} alt='logo' />
       <div className='meteor-card__content'>
         <h2 className='meteor-card__title'>{formatText(props.name)}</h2>
         <div className='meteor-card__info'>

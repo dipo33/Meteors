@@ -44,5 +44,6 @@ const localization: { [key: string]: string } = {
 };
 
 export const localize = (unlocalizedName: string) => {
+  console.log(unlocalizedName.replaceAll(':', '--'), '                 ');
   return localization[unlocalizedName] ?? unlocalizedName;
 };
