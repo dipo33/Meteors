@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 function App() {
-  axios.defaults.baseURL = 'http://localhost:3000';
+  axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
   const [versionId, setVersionId] = useState(1);
 
