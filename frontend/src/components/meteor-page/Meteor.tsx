@@ -23,7 +23,7 @@ const Meteor = (props: MeteorProps) => {
   };
 
   const toTexturePath = (unlocalizedName: string) => {
-    return `/textures/${unlocalizedName.replaceAll(':', '--')}.png`;
+    return `/textures/catalyst/${unlocalizedName.replaceAll(':', '--')}.png`;
   };
 
   const dropdownClick = () => {
