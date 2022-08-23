@@ -1,7 +1,8 @@
 import MeteorOre from './MeteorOre';
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import { localize } from '../../utils/Localization';
-import { formatNumber } from '../../utils/Formatting';
+import { formatNumber, formatText } from '../../utils/Formatting';
+import { imageOnError } from '../../utils/Utils';
 
 export interface MeteorProps {
   name: string;
@@ -17,26 +18,12 @@ export interface MeteorProps {
 const Meteor = (props: MeteorProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const imageOnError = (event: SyntheticEvent<HTMLImageElement>) => {
-    event.currentTarget.onerror = null;
-    event.currentTarget.src = '/gtnh.png';
-  };
-
   const toTexturePath = (unlocalizedName: string) => {
     return `/textures/catalyst/${unlocalizedName.replaceAll(':', '--')}.png`;
   };
 
   const dropdownClick = () => {
     setIsOpen(!isOpen);
-  };
-
-  const formatText = (text: string) => {
-    let result = text.replace(/([^A-Z])([A-Z])/g, '$1 $2');
-    result = result.replace(/([^ ])([A-Z])([a-z])/g, '$1 $2$3');
-    result = result.replace(/([a-z])([0-9])/g, '$1 $2');
-    result = result.charAt(0).toUpperCase() + result.substring(1);
-    if (result.charAt(0) === ' ') return result.substring(1);
-    return result;
   };
 
   const computeOres = (ores: MeteorProps['ores']) => {
@@ -47,7 +34,7 @@ const Meteor = (props: MeteorProps) => {
 
     return ores.map((ore) => {
       return {
-        name: formatText(ore.name),
+        name: ore.name,
         weight: ore.weight,
         proportion: Math.ceil(ore.weight / total * 1000) / 10,
         amount: Math.ceil(3 / 4 * Math.PI * Math.pow(props.radius, 3) / total * ore.weight),

@@ -1,4 +1,5 @@
-import { formatNumber } from '../../utils/Formatting';
+import { formatNumber, formatText } from '../../utils/Formatting';
+import { imageOnError } from '../../utils/Utils';
 
 export interface MeteorOreProps {
   name: string;
@@ -8,11 +9,16 @@ export interface MeteorOreProps {
 }
 
 const MeteorOre = (props: MeteorOreProps) => {
+
+  const toTexturePath = (unlocalizedName: string) => {
+    return `/textures/ore/${unlocalizedName}.png`;
+  };
+
   return (
     <div className='meteor-item-card'>
-      <img className='meteor-item-card__image' src={'/gtnh.png'} alt='logo' />
+      <img className='meteor-item-card__image' src={toTexturePath(props.name)} onError={imageOnError} alt='logo' />
       <div className='meteor-item-card__content'>
-        <h3 className='meteor-item-card__title'>{props.name}</h3>
+        <h3 className='meteor-item-card__title'>{formatText(props.name)}</h3>
         <div className='meteor-item-card__info'>
           <span className='meteor-item-card__info--highlight'>Weight – </span>
           <span>{props.weight}, </span>

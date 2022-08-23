@@ -35,8 +35,15 @@
 .meteor-card__image, .meteor-item-card__image {
     background: var(--gray-background-color);
     border-radius: 1rem;
-    padding: 1rem;
     image-rendering: crisp-edges;
+}
+
+.meteor-card__image {
+    padding: 1rem;
+}
+
+.meteor-item-card__image {
+    padding: 0.5rem;
 }
 
 .meteor-card__content, .meteor-item-card__content {
