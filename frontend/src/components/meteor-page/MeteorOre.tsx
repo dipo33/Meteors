@@ -11,7 +11,7 @@ export interface MeteorOreProps {
 const MeteorOre = (props: MeteorOreProps) => {
 
   const toTexturePath = (unlocalizedName: string) => {
-    return `/textures/ore/${unlocalizedName}.png`;
+    return `textures/ore/${unlocalizedName}.png`;
   };
 
   return (

@@ -19,7 +19,7 @@ const Meteor = (props: MeteorProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toTexturePath = (unlocalizedName: string) => {
-    return `/textures/catalyst/${unlocalizedName.replaceAll(':', '--')}.png`;
+    return `textures/catalyst/${unlocalizedName.replaceAll(':', '--')}.png`;
   };
 
   const dropdownClick = () => {
@@ -61,7 +61,7 @@ const Meteor = (props: MeteorProps) => {
       </div>
       <button onClick={dropdownClick}
               className={`meteor-card__dropdown ${isOpen ? 'meteor-card__dropdown--active' : ''}`}>
-        <img className='meteor-card__dropdown-icon' src='dropdown.svg' alt='dropdown button' />
+        <img className='meteor-card__dropdown-icon' src='assets/dropdown.svg' alt='dropdown button' />
       </button>
     </div>
     {isOpen && (<>

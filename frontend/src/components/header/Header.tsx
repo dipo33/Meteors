@@ -34,7 +34,7 @@ const Header = ({ setVersionId }: HeaderProps) => {
   return (
     <header className='header'>
       <Link to='/'>
-        <img className='logo' src={'/gtnh.png'} alt='logo' />
+        <img className='logo' src={'assets/gtnh.png'} alt='logo' />
       </Link>
       <ul className='main-nav'>
         <li className='main-nav__item'>
