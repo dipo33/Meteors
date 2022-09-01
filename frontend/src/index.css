@@ -146,6 +146,7 @@ a:active {
     font-size: inherit;
     font-family: inherit;
     padding-left: 0.3rem;
+    color: white;
 }
 
 .main-nav__item:nth-last-child(1) {
