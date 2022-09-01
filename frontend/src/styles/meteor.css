@@ -35,7 +35,7 @@
 .meteor-card__image, .meteor-item-card__image {
     background: var(--gray-background-color);
     border-radius: 1rem;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 .meteor-card__image {
