@@ -38,8 +38,10 @@ const Header = ({ setVersionId }: HeaderProps) => {
       </Link>
       <ul className='main-nav'>
         <li className='main-nav__item'>
-          <Link className='main-nav__item--highlight' to='/'>GregTech: New Horizons – </Link>
-          <span className='main-nav__item--selected'>Meteors</span>
+          <h1>
+            <Link className='main-nav__item--highlight' to='/'>GregTech: New Horizons – </Link>
+            <span className='main-nav__item--selected'>Meteors</span>
+          </h1>
         </li>
         <li className='main-nav__item'>
           <span className='main-nav__item--highlight'>Version: </span>
