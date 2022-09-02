@@ -43,10 +43,8 @@ const Header = ({ setVersionId }: HeaderProps) => {
             <span className='main-nav__item--selected'>Meteors</span>
           </h1>
         </div>
-        <div className='main-nav__item main-nav__item--right'>
-          <span className='main-nav__item--highlight'>Version: </span>
-        </div>
         <div className='main-nav__item'>
+          <span className='main-nav__item--highlight'>Version: </span>
           <select className='main-nav__version-select' onChange={onVersionChange} name='versions'>
             {
               versions.map((version, index) => (
