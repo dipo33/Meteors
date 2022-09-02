@@ -58,7 +58,7 @@
     flex-direction: row;
     align-items: flex-start;
     padding: 0.5rem;
-    height: 5rem;
+    min-height: 5rem;
 }
 
 .meteor-card__image, .meteor-item-card__image {
@@ -67,15 +67,24 @@
     image-rendering: pixelated;
 }
 
-.meteor-card__image-holder {
+.meteor-card__image-holder, .meteor-item-card__image-holder {
     display: flex;
     flex-direction: column;
     background: var(--gray-background-color);
 
-    padding: 1rem;
     border-radius: 1rem;
+}
+
+.meteor-card__image-holder {
+    padding: 1rem;
     height: 6rem;
     width: 6rem;
+}
+
+.meteor-item-card__image-holder {
+    padding: 0.5rem;
+    height: 4.25rem;
+    width: 4.25rem;
 }
 
 .meteor-card__image {
@@ -84,8 +93,8 @@
 }
 
 .meteor-item-card__image {
-    padding: 0.5rem;
-    height: 84%;
+    height: 100%;
+    align-self: center;
 }
 
 .meteor-card__content, .meteor-item-card__content {

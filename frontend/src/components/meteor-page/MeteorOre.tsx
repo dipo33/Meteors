@@ -16,7 +16,9 @@ const MeteorOre = (props: MeteorOreProps) => {
 
   return (
     <div className='meteor-item-card'>
-      <img className='meteor-item-card__image' src={toTexturePath(props.name)} onError={imageOnError} alt='logo' />
+      <div className='meteor-item-card__image-holder'>
+        <img className='meteor-item-card__image' src={toTexturePath(props.name)} onError={imageOnError} alt='logo' />
+      </div>
       <div className='meteor-item-card__content'>
         <h3 className='meteor-item-card__title'>{formatText(props.name)}</h3>
         <div className='meteor-item-card__info'>
