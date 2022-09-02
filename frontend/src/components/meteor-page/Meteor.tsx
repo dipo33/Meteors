@@ -44,7 +44,9 @@ const Meteor = (props: MeteorProps) => {
 
   return (<div className='meteor-card'>
     <div className='meteor-card__top'>
-      <img className='meteor-card__image' src={toTexturePath(props.catalyst)} onError={imageOnError} alt='logo' />
+      <div className='meteor-card__image-holder'>
+        <img className='meteor-card__image' src={toTexturePath(props.catalyst)} onError={imageOnError} alt='logo' />
+      </div>
       <div className='meteor-card__content'>
         <h2 className='meteor-card__title'>{formatText(props.name)}</h2>
         <div className='meteor-card__info'>
