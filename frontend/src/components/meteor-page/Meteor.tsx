@@ -57,7 +57,7 @@ const Meteor = (props: MeteorProps) => {
           <span className='meteor-card__info--highlight'>Radius – </span>
           <span>{props.radius} blocks</span>
         </div>
-        <div className='meteor-card__info'>
+        <div className='meteor-card__info --text-indent'>
           <span className='meteor-card__info--highlight'>Catalyst – </span>
           <span>{localize(props.catalyst)}</span></div>
       </div>
