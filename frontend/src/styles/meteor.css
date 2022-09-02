@@ -98,7 +98,6 @@
 }
 
 .meteor-card__content, .meteor-item-card__content {
-    margin-top: 0.2rem;
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
@@ -113,7 +112,7 @@
 
 .meteor-item-card__title {
     font-size: var(--even-smaller-font-size);
-    margin: 0.25rem 0;
+    margin-bottom: 0.25rem;
     color: var(--light-blue-highlight-color);
     font-weight: 900;
 }
