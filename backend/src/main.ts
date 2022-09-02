@@ -7,13 +7,21 @@ import 'dotenv/config';
 const port = process.env.BACKEND_PORT;
 const host = process.env.BACKEND_HOST;
 
-async function bootstrap() {
-  const httpsOptions = {
-    key: fs.readFileSync(process.env.SSL_KEY),
-    cert: fs.readFileSync(process.env.SSL_CERTIFICATE),
-  };
+async function createApp() {
+  if (process.env.ENABLE_HTTPS === 'true') {
+    const httpsOptions = {
+      key: fs.readFileSync(process.env.SSL_KEY),
+      cert: fs.readFileSync(process.env.SSL_CERTIFICATE),
+    };
 
-  const app = await NestFactory.create(AppModule, { httpsOptions });
+    return await NestFactory.create(AppModule, { httpsOptions });
+  } else {
+    return await NestFactory.create(AppModule);
+  }
+}
+
+async function bootstrap() {
+  const app = await createApp();
   app.enableCors({
     origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
