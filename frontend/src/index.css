@@ -111,29 +111,29 @@ a:active {
 
 .logo {
     width: 8rem;
-    margin: -0.5rem -2rem 0 5rem;
+    margin: -0.5rem 1rem 0 5rem;
 }
 
 .main-nav {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin: 0.6rem 0;
-    flex-grow: 1;
-}
-
-.main-nav li {
-    margin: 0 1rem 0 1rem;
-    list-style-type: none;
+    align-items: center;
     flex-grow: 1;
 }
 
 .main-nav__item {
     color: var(--white-color);
+    margin: 0 1rem 0 1rem;
 }
 
 .main-nav__item--highlight {
     color: var(--light-blue-highlight-color);
+}
+
+.main-nav__item--right {
+    margin: 0 0 0 auto;
+    text-align: right;
 }
 
 .main-nav__item--selected {
@@ -156,6 +156,5 @@ a:active {
 }
 
 .main-nav__item:nth-last-child(1) {
-    margin: 0 7rem 0 auto;
-    text-align: right;
+    margin-right: 7rem;
 }

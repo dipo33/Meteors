@@ -36,15 +36,17 @@ const Header = ({ setVersionId }: HeaderProps) => {
       <Link to='/'>
         <img className='logo' src={'assets/gtnh.png'} alt='logo' />
       </Link>
-      <ul className='main-nav'>
-        <li className='main-nav__item'>
+      <div className='main-nav'>
+        <div className='main-nav__item'>
           <h1>
             <Link className='main-nav__item--highlight' to='/'>GregTech: New Horizons – </Link>
             <span className='main-nav__item--selected'>Meteors</span>
           </h1>
-        </li>
-        <li className='main-nav__item'>
+        </div>
+        <div className='main-nav__item main-nav__item--right'>
           <span className='main-nav__item--highlight'>Version: </span>
+        </div>
+        <div className='main-nav__item'>
           <select className='main-nav__version-select' onChange={onVersionChange} name='versions'>
             {
               versions.map((version, index) => (
@@ -52,8 +54,8 @@ const Header = ({ setVersionId }: HeaderProps) => {
               ))
             }
           </select>
-        </li>
-      </ul>
+        </div>
+      </div>
     </header>
   );
 };
