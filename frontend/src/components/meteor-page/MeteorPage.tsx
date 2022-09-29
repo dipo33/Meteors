@@ -28,6 +28,7 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
   const remapMeteors = (meteors: any[]) => {
     return meteors.map((meteor: any) => {
       return {
+        id: meteor.id,
         name: meteor.name,
         cost: meteor.cost,
         radius: meteor.radius,
@@ -45,8 +46,8 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
   return (
     <main className='main-content'>
       {
-        meteors.map((meteor: MeteorProps, index) => (
-          <Meteor key={index} {...meteor} />
+        meteors.map((meteor: MeteorProps) => (
+          <Meteor key={meteor.id} {...meteor} />
         ))
       }
     </main>

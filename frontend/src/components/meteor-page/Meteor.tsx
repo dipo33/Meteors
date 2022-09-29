@@ -5,6 +5,7 @@ import { formatNumber, formatText } from '../../utils/Formatting';
 import { imageOnError } from '../../utils/Utils';
 
 export interface MeteorProps {
+  id: number;
   name: string;
   cost: number;
   radius: number;
