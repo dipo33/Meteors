@@ -1,6 +1,6 @@
 import '../../styles/meteor.css';
 import Meteor, { MeteorProps } from './Meteor';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
 export interface MeteorPageProps {
@@ -10,6 +10,7 @@ export interface MeteorPageProps {
 const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
   const [meteors, setMeteors] = useState<MeteorProps[]>([]);
+  const [filter, setFilter] = useState<string>('');
 
   useEffect(() => {
     axios
@@ -43,10 +44,21 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
     });
   };
 
+
+  const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value.toLowerCase());
+  };
+
   return (
     <main className='main-content'>
+      <div className='main-filter'>
+        <span className='--highlight'>Filter by Ore:</span>
+        <input className='main-filter__input' type='text' onChange={onFilterChange} />
+      </div>
       {
-        meteors.map((meteor: MeteorProps) => (
+        meteors.filter((meteor: MeteorProps) =>
+          (meteor.ores.some(ore => ore.name.toLowerCase().includes(filter.toLowerCase()))),
+        ).map((meteor) => (
           <Meteor key={meteor.id} {...meteor} />
         ))
       }

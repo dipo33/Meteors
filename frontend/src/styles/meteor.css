@@ -28,6 +28,27 @@
     }
 }
 
+.main-filter {
+    margin: 0 0 1rem auto;
+}
+
+.main-filter__input {
+    margin-left: 1rem;
+
+    outline: none;
+    box-sizing: border-box;
+    background-color: var(--dark-gray-background-color);
+    border-color: var(--dark-gray-background-color);
+    border-style: solid;
+    border-width: 0.5rem;
+    border-radius: 0.3rem;
+    font-weight: 900;
+    font-size: inherit;
+    font-family: inherit;
+    padding-left: 0.3rem;
+    color: white;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
