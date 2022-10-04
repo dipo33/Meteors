@@ -14,6 +14,7 @@ datasource db {
 model GameVersion {
   id        Int     @id @default(autoincrement())
   name      String
+  createdAt DateTime
 
   meteors   Meteor[]
 }

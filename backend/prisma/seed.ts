@@ -33,6 +33,7 @@ async function main() {
     const gameVersion = await prisma.gameVersion.create({
       data: {
         name: version.name,
+        createdAt: version.created_at,
       },
     });
 

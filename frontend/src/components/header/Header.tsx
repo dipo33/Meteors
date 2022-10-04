@@ -9,6 +9,7 @@ export interface HeaderProps {
 type Version = {
   id: number;
   name: string;
+  createdAt: Date;
 }
 
 const Header = ({ setVersionId }: HeaderProps) => {
@@ -18,7 +19,7 @@ const Header = ({ setVersionId }: HeaderProps) => {
     axios.get('/versions')
       .then(response => {
         if (response.status === 200) {
-          setVersions(response.data);
+          setVersions(response.data.map((version: any) => ({ ...version, createdAt: new Date(version.createdAt) })));
         }
       })
       .catch(error => {
@@ -47,9 +48,11 @@ const Header = ({ setVersionId }: HeaderProps) => {
           <span className='main-nav__item--highlight'>Version: </span>
           <select className='main-nav__version-select' onChange={onVersionChange} name='versions'>
             {
-              versions.map((version, index) => (
-                <option key={index} value={version.id}>{version.name}</option>
-              ))
+              versions
+                .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+                .map((version, index) => (
+                  <option key={index} value={version.id}>{version.name} </option>
+                ))
             }
           </select>
         </div>
