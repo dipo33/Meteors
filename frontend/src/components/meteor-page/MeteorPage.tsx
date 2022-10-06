@@ -3,6 +3,7 @@ import Meteor, { MeteorProps } from './Meteor';
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import ErrorBox, { ErrorBoxProps } from './ErrorBox';
+import { formatText } from '../../utils/Formatting';
 
 export interface MeteorPageProps {
   versionId: number;
@@ -40,6 +41,7 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
         ores: meteor.items.map((item: any) => {
           return {
             name: item.name,
+            displayName: formatText(item.name),
             weight: item.weight,
           };
         }),
@@ -51,7 +53,7 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const filter = event.target.value.toLowerCase();
     setFiltered(meteors.filter(
-      (meteor) => meteor.ores.some((ore) => ore.name.toLowerCase().includes(filter)),
+      (meteor) => meteor.ores.some((ore) => ore.displayName.toLowerCase().includes(filter)),
     ));
   };
 

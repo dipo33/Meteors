@@ -12,6 +12,7 @@ export interface MeteorProps {
   catalyst: string;
   ores: {
     name: string;
+    displayName: string;
     weight: number;
   }[];
 }
@@ -36,6 +37,7 @@ const Meteor = (props: MeteorProps) => {
     return ores.map((ore) => {
       return {
         name: ore.name,
+        displayName: ore.displayName,
         weight: ore.weight,
         proportion: Math.ceil(ore.weight / total * 1000) / 10,
         amount: Math.ceil(3 / 4 * Math.PI * Math.pow(props.radius, 3) / total * ore.weight),
@@ -72,7 +74,8 @@ const Meteor = (props: MeteorProps) => {
       <div className='meteor-card__bottom'>
         {
           computeOres(props.ores).map((ore, index) => (
-            <MeteorOre key={index} name={ore.name} weight={ore.weight} proportion={ore.proportion}
+            <MeteorOre key={index} name={ore.name} displayName={ore.displayName} weight={ore.weight}
+                       proportion={ore.proportion}
                        amount={ore.amount} />
           ))
         }

@@ -1,8 +1,9 @@
-import { formatNumber, formatText } from '../../utils/Formatting';
+import { formatNumber } from '../../utils/Formatting';
 import { imageOnError } from '../../utils/Utils';
 
 export interface MeteorOreProps {
   name: string;
+  displayName: string;
   weight: number;
   proportion: number;
   amount: number;
@@ -20,7 +21,7 @@ const MeteorOre = (props: MeteorOreProps) => {
         <img className='meteor-item-card__image' src={toTexturePath(props.name)} onError={imageOnError} alt='logo' />
       </div>
       <div className='meteor-item-card__content'>
-        <h3 className='meteor-item-card__title'>{formatText(props.name)}</h3>
+        <h3 className='meteor-item-card__title'>{props.displayName}</h3>
         <div className='meteor-item-card__info'>
           <span className='meteor-item-card__info--highlight'>Weight – </span>
           <span>{props.weight}, </span>
