@@ -52,9 +52,24 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const filter = event.target.value.toLowerCase();
-    setFiltered(meteors.filter(
+    const filtered = meteors.filter(
       (meteor) => meteor.ores.some((ore) => ore.displayName.toLowerCase().includes(filter)),
-    ));
+    ).map((meteor) => {
+        return {
+          ...meteor, ores: meteor.ores.map((ore => {
+            return { ...ore, filtered: filter.length > 0 && ore.displayName.toLowerCase().includes(filter) };
+          })),
+        };
+      },
+    ).map((meteor) => {
+      return {
+        ...meteor,
+        ores: meteor.ores.filter((ore) => ore.filtered).concat(
+          meteor.ores.filter((ore) => !ore.filtered)),
+      };
+    });
+
+    setFiltered(filtered);
   };
 
   return (

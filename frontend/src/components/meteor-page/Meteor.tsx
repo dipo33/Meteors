@@ -14,6 +14,7 @@ export interface MeteorProps {
     name: string;
     displayName: string;
     weight: number;
+    filtered: boolean;
   }[];
 }
 
@@ -41,6 +42,7 @@ const Meteor = (props: MeteorProps) => {
         weight: ore.weight,
         proportion: Math.ceil(ore.weight / total * 1000) / 10,
         amount: Math.ceil(3 / 4 * Math.PI * Math.pow(props.radius, 3) / total * ore.weight),
+        filtered: ore.filtered,
       };
     });
   };
@@ -75,8 +77,7 @@ const Meteor = (props: MeteorProps) => {
         {
           computeOres(props.ores).map((ore, index) => (
             <MeteorOre key={index} name={ore.name} displayName={ore.displayName} weight={ore.weight}
-                       proportion={ore.proportion}
-                       amount={ore.amount} />
+                       proportion={ore.proportion} amount={ore.amount} filtered={ore.filtered} />
           ))
         }
       </div>

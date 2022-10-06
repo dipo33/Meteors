@@ -124,6 +124,10 @@ a:active {
     color: var(--light-blue-highlight-color);
 }
 
+.--underline {
+    text-decoration: underline;
+}
+
 .main-nav__item--selected {
     font-weight: 900;
 }
