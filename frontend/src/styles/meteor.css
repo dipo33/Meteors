@@ -175,3 +175,10 @@
     padding-left: 1.0rem;
     text-indent: -1.0rem;
 }
+
+.no-result {
+    font-size: var(--default-font-size);
+    color: var(--white-color);
+    font-weight: 900;
+    margin: 5rem auto;
+}

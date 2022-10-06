@@ -10,7 +10,7 @@ export interface MeteorPageProps {
 const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
   const [meteors, setMeteors] = useState<MeteorProps[]>([]);
-  const [filter, setFilter] = useState<string>('');
+  const [filtered, setFiltered] = useState<MeteorProps[]>([]);
 
   useEffect(() => {
     axios
@@ -46,7 +46,10 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
 
   const onFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(event.target.value.toLowerCase());
+    const filter = event.target.value.toLowerCase();
+    setFiltered(meteors.filter(
+      (meteor) => meteor.ores.some((ore) => ore.name.toLowerCase().includes(filter)),
+    ));
   };
 
   return (
@@ -56,11 +59,14 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
         <input className='main-filter__input' type='text' onChange={onFilterChange} />
       </div>
       {
-        meteors.filter((meteor: MeteorProps) =>
-          (meteor.ores.some(ore => ore.name.toLowerCase().includes(filter.toLowerCase()))),
-        ).map((meteor) => (
+        filtered.map((meteor) => (
           <Meteor key={meteor.id} {...meteor} />
         ))
+      }
+      {
+        filtered.length === 0 && (
+          <span className='no-result'>No results</span>
+        )
       }
     </main>
   );
