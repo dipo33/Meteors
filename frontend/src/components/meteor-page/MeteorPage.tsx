@@ -2,6 +2,7 @@ import '../../styles/meteor.css';
 import Meteor, { MeteorProps } from './Meteor';
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import ErrorBox, { ErrorBoxProps } from './ErrorBox';
 
 export interface MeteorPageProps {
   versionId: number;
@@ -11,18 +12,20 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
 
   const [meteors, setMeteors] = useState<MeteorProps[]>([]);
   const [filtered, setFiltered] = useState<MeteorProps[]>([]);
+  const [error, setError] = useState<ErrorBoxProps | null>(null);
 
   useEffect(() => {
     axios
       .get(`/versions/${versionId}/meteors`)
       .then((response: AxiosResponse) => {
         if (response.status === 200) {
-          setMeteors(remapMeteors(response.data));
+          const remapped = remapMeteors(response.data);
+          setMeteors(remapped);
+          setFiltered(remapped);
         }
       })
       .catch((error) => {
-        // TODO: Add proper error handling
-        console.error(error);
+        setError({ error: error.name, description: error.message });
       });
   }, [versionId]);
 
@@ -58,15 +61,18 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
         <span className='--highlight'>Filter by Ore:</span>
         <input className='main-filter__input' type='text' onChange={onFilterChange} />
       </div>
-      {
+      {!error &&
         filtered.map((meteor) => (
           <Meteor key={meteor.id} {...meteor} />
         ))
       }
       {
-        filtered.length === 0 && (
+        filtered.length === 0 && meteors.length > 0 && !error && (
           <span className='no-result'>No results</span>
         )
+      }
+      {error &&
+        <ErrorBox {...error} />
       }
     </main>
   );

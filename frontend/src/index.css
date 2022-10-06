@@ -142,3 +142,31 @@ a:active {
     padding-left: 0.3rem;
     color: white;
 }
+
+.error-card {
+    border-radius: 1rem;
+    background: var(--dark-gray-background-color);
+    display: flex;
+    flex-direction: column;
+
+    min-width: 20rem;
+    max-width: 50rem;
+    margin: 5rem auto;
+    padding: 1.5rem;
+}
+
+.error-card__title {
+    font-size: var(--default-font-size);
+    font-weight: 900;
+
+    margin: 0 auto 0.5rem auto;
+}
+
+.error-card__message {
+    font-size: var(--even-smaller-font-size);
+    font-weight: 300;
+    text-align: center;
+    overflow: auto;
+
+    margin: 0 auto;
+}
