@@ -53,6 +53,7 @@
     --gray-background-color: #242424;
     --light-blue-highlight-color: #7ab6e0;
     --white-color: #ffffff;
+    --orange-color: #e95420;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -124,8 +125,9 @@ a:active {
     color: var(--light-blue-highlight-color);
 }
 
-.--underline {
-    text-decoration: underline;
+.--string-match {
+    background-color: var(--orange-color);
+    color: var(--white-color);
 }
 
 .main-nav__item--selected {

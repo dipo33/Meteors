@@ -45,6 +45,7 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
             weight: item.weight,
           };
         }),
+        filter: '',
       };
     });
   };
@@ -56,7 +57,9 @@ const MeteorPage = ({ versionId }: MeteorPageProps) => {
       (meteor) => meteor.ores.some((ore) => ore.displayName.toLowerCase().includes(filter)),
     ).map((meteor) => {
         return {
-          ...meteor, ores: meteor.ores.map((ore => {
+          ...meteor,
+          filter: filter,
+          ores: meteor.ores.map((ore => {
             return { ...ore, filtered: filter.length > 0 && ore.displayName.toLowerCase().includes(filter) };
           })),
         };
